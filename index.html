@@ -51,23 +51,23 @@
 
     //移動するドーナツ1～5
     var torus_move1 = new THREE.Mesh( t_move, tM2 );
-    torus_move1.position.set( 0, 0, -10);
+    torus_move1.position.set( 0, 0, -4);
     //scene.add( torus_move1 );
     
     var torus_move2 = new THREE.Mesh( t_move, tM2 );
-    torus_move2.position.set( 0, 0, -12);
+    torus_move2.position.set( 0, 0, 0);
     //scene.add( torus_move2 );
 
     var torus_move3 = new THREE.Mesh( t_move, tM2 );
-    torus_move3.position.set( 0, 0, -14);
+    torus_move3.position.set( 0, 0, 4);
     //scene.add( torus_move3 );
 
     var torus_move4 = new THREE.Mesh( t_move, tM2 );
-    torus_move4.position.set( 0, 0, -16);
+    torus_move4.position.set( 0, 0, 8);
     //scene.add( torus_move4 );
 
     var torus_move5 = new THREE.Mesh( t_move, tM2 );
-    torus_move5.position.set( 0, 0, -18);
+    torus_move5.position.set( 0, 0, 12);
     //scene.add( torus_move5 );
     
     
@@ -81,16 +81,20 @@
     //scene.add( sphere );
 
 
-    //ブロック
-    var coneGeometry = new THREE.ConeGeometry(0.5,1,5);
-    var coneMaterial = new THREE. MeshPhongMaterial( {color: 0x0000ff} );
+    //中央の箱
+    var geometry = new THREE.BoxGeometry(1, 1, 1);
+    var material = new THREE.MeshPhongMaterial({ color: 0xffff00 });
 
-    var cone = new THREE.Mesh( coneGeometry, coneMaterial );
-    cone.position.set( 0, 0, -10 );
-    scene.add(cone);
+    var box1 = new THREE.Mesh(geometry, material);
+    box1.position.set( 0, 0, -10 );
+    scene.add(box1);
+
+    /*var cone2 = new THREE.Mesh( coneGeometry, coneMaterial );
+    cone2.position.set( 0, 0, -10 );
+    scene.add(cone2);*/
 
 
-     //グループ
+    //グループ
     const Group1 = new THREE.Group()
     Group1.add(torus1);
     Group1.add(torus2);
@@ -127,16 +131,20 @@
   
       // 箱を回転させる
       torus1.rotation.x += 0.01;
-      //torus1.rotation.y += 0.01;
 
-      //torus2.rotation.x += 0.01;
       torus2.rotation.y += 0.01;
 
       sphere.rotation.x += 0.01;
-      //sphere.rotation.y -= 0.01;
 
+      box1.rotation.x += 0.01;
+      box1.rotation.y += 0.01;
+ 
       Group1.rotation.x += 0.008;
       Group1.rotation.y += 0.008;
+
+      Group2.position.z -=0.01;
+
+
 
 
   
