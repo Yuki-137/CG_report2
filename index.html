@@ -28,14 +28,40 @@
     // カメラを作成
     var camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
   
-//ドーナッツ
-var torusGeometry = new THREE.TorusGeometry( 0.5, 0.2, 6, 12 ); 
-//半径、ドーナッツの太さ、ドーナッツのチューブ方向の分割数、水平方向の分割数
-var torusMaterial = new THREE. MeshPhongMaterial( { color: 0x0000ff } );
-var torus = new THREE.Mesh( torusGeometry, torusMaterial );
-torus.position.set( 0, 0, -5);
-scene.add( torus );
 
+
+    //ドーナツ1
+    var torusGeometry = new THREE.TorusGeometry( 2, 0.2, 6, 12 ); 
+    var torusMaterial = new THREE. MeshPhongMaterial( { color: 0x0000ff } );
+
+
+    var torus1 = new THREE.Mesh( torusGeometry, torusMaterial );
+    torus1.position.set( -2, 0, -1);
+    //scene.add( torus1 );
+
+
+    //ドーナツ2
+    var torus2 = new THREE.Mesh( torusGeometry, torusMaterial );
+    torus2.position.set( -2, 0, -1);
+    //scene.add( torus2 );
+
+    //球
+    var sphereGeometry = new THREE.SphereGeometry( 0.5, 32, 32 ); 
+    var sphereMaterial = new THREE. MeshPhongMaterial( {color: 0x0000ff,wireframe: true} );
+
+    var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+    sphere.position.set( -2, 0, -1);
+    //scene.add( sphere );
+
+
+     //全体のオブジェクト
+    //const all = new THREE.Object3D(); 
+    const all = new THREE.Group()
+    all.add(torus1);
+    all.add(torus2);
+    all.add(sphere);
+    all.position.set(0,0,-10);//箱1～4のグループの原点の位置
+    scene.add(all);
 
 
 
@@ -56,8 +82,16 @@ scene.add( torus );
       requestAnimationFrame(update);
   
       // 箱を回転させる
-      torus.rotation.x += 0.01;
-      torus.rotation.y += 0.01;
+      torus1.rotation.x += 0.01;
+      //torus1.rotation.y += 0.01;
+
+      //torus2.rotation.x += 0.01;
+      torus2.rotation.y += 0.01;
+
+      sphere.rotation.x += 0.01;
+      //sphere.rotation.y -= 0.01;
+
+      all.rotation.y += 0.01;
   
       renderer.render(scene, camera);
     };
