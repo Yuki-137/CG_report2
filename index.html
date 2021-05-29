@@ -34,7 +34,6 @@
     var torusGeometry = new THREE.TorusGeometry( 2, 0.2, 6, 12 ); 
     var torusMaterial = new THREE. MeshPhongMaterial( { color: 0x0000ff } );
 
-
     var torus1 = new THREE.Mesh( torusGeometry, torusMaterial );
     torus1.position.set( -2, 0, -1);
     //scene.add( torus1 );
@@ -45,6 +44,14 @@
     torus2.position.set( -2, 0, -1);
     //scene.add( torus2 );
 
+    var torusGeometry2 = new THREE.TorusGeometry( 2, 0.1, 6, 12 ); 
+    var torusMaterial2 = new THREE. MeshPhongMaterial( { color: 0xff0000 } );
+
+    var torus3 = new THREE.Mesh( torusGeometry2, torusMaterial2 );
+    torus3.position.set( 0, 0, -10);
+    scene.add( torus3 );
+    
+
     //球
     var sphereGeometry = new THREE.SphereGeometry( 0.5, 32, 32 ); 
     var sphereMaterial = new THREE. MeshPhongMaterial( {color: 0x0000ff,wireframe: true} );
@@ -54,14 +61,22 @@
     //scene.add( sphere );
 
 
-     //全体のオブジェクト
-    //const all = new THREE.Object3D(); 
-    const all = new THREE.Group()
-    all.add(torus1);
-    all.add(torus2);
-    all.add(sphere);
-    all.position.set(0,0,-10);//箱1～4のグループの原点の位置
-    scene.add(all);
+    //ブロック
+    var coneGeometry = new THREE.ConeGeometry(0.5,1,5);
+    var coneMaterial = new THREE. MeshPhongMaterial( {color: 0x0000ff} );
+
+    var cone = new THREE.Mesh( coneGeometry, coneMaterial );
+    cone.position.set( 0, 0, -10 );
+    scene.add(cone);
+
+
+     //グループ
+    const Group1 = new THREE.Group()
+    Group1.add(torus1);
+    Group1.add(torus2);
+    Group1.add(sphere);
+    Group1.position.set(0,0,-10);
+    scene.add(Group1);
 
 
 
@@ -91,7 +106,8 @@
       sphere.rotation.x += 0.01;
       //sphere.rotation.y -= 0.01;
 
-      all.rotation.y += 0.01;
+      Group1.rotation.x += 0.01;
+      Group1.rotation.y += 0.01;
   
       renderer.render(scene, camera);
     };
