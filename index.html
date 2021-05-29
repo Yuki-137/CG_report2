@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>sample1</title>
+  <title>sample6</title>
 
   <!-- three.jsを読み込む(ローカル) -->
   <!-- <script src="./three.js"></script> -->
@@ -28,24 +28,17 @@
     // カメラを作成
     var camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
   
-    // 箱を作成
-    var geometry = new THREE.BoxGeometry(0.3, 0.3, 0.3);
-    var material = new THREE.MeshPhongMaterial({ color: 0x0000ff });
-    var box1 = new THREE.Mesh(geometry, material);
-    box1.position.set(0.3,0,-5);
-    scene.add(box1);
-    //
-    var box2 = new THREE.Mesh(geometry, material);
-    box2.position.set(0.9,0,-5);
-    scene.add(box2);
-    //
-    var box3 = new THREE.Mesh(geometry, material);
-    box3.position.set(-0.3,0,-5);
-    scene.add(box3);
-    //
-    var box4 = new THREE.Mesh(geometry, material);
-    box4.position.set(-0.9,0,-5);
-    scene.add(box4);
+//ドーナッツ
+var torusGeometry = new THREE.TorusGeometry( 0.5, 0.2, 6, 12 ); 
+//半径、ドーナッツの太さ、ドーナッツのチューブ方向の分割数、水平方向の分割数
+var torusMaterial = new THREE. MeshPhongMaterial( { color: 0x0000ff } );
+var torus = new THREE.Mesh( torusGeometry, torusMaterial );
+torus.position.set( 0, 0, -5);
+scene.add( torus );
+
+
+
+
   
     // 平行光源1
     var directionalLight1 = new THREE.DirectionalLight(0xffffff);
@@ -63,14 +56,8 @@
       requestAnimationFrame(update);
   
       // 箱を回転させる
-      box1.rotation.x += 0.01;
-      box1.rotation.y += 0.01;
-      box2.rotation.x += 0.01;
-      box2.rotation.y += 0.01;
-      box3.rotation.x += 0.01;
-      box3.rotation.y += 0.01;
-      box4.rotation.x += 0.01;
-      box4.rotation.y += 0.01;
+      torus.rotation.x += 0.01;
+      torus.rotation.y += 0.01;
   
       renderer.render(scene, camera);
     };
