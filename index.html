@@ -31,33 +31,53 @@
 
 
     //ドーナツ1
-    var torusGeometry = new THREE.TorusGeometry( 2, 0.2, 6, 12 ); 
+    var torusGeometry = new THREE.TorusGeometry( 2, 0.1, 6, 12 ); 
     var torusMaterial = new THREE. MeshPhongMaterial( { color: 0x0000ff } );
 
     var torus1 = new THREE.Mesh( torusGeometry, torusMaterial );
-    torus1.position.set( -2, 0, -1);
+    torus1.position.set( 0, 0, -10);
     //scene.add( torus1 );
 
 
     //ドーナツ2
     var torus2 = new THREE.Mesh( torusGeometry, torusMaterial );
-    torus2.position.set( -2, 0, -1);
+    torus2.position.set( 0, 0, -10);
     //scene.add( torus2 );
 
-    var torusGeometry2 = new THREE.TorusGeometry( 2, 0.1, 6, 12 ); 
-    var torusMaterial2 = new THREE. MeshPhongMaterial( { color: 0xff0000 } );
+    
+    //移動するドーナツ群
+    var t_move = new THREE.TorusGeometry( 2, 0.1, 6, 12 ); 
+    var tM2= new THREE. MeshPhongMaterial( { color: 0xff0000 , wireframe: true} );
 
-    var torus3 = new THREE.Mesh( torusGeometry2, torusMaterial2 );
-    torus3.position.set( 0, 0, -10);
-    scene.add( torus3 );
+    //移動するドーナツ1～5
+    var torus_move1 = new THREE.Mesh( t_move, tM2 );
+    torus_move1.position.set( 0, 0, -10);
+    //scene.add( torus_move1 );
+    
+    var torus_move2 = new THREE.Mesh( t_move, tM2 );
+    torus_move2.position.set( 0, 0, -12);
+    //scene.add( torus_move2 );
+
+    var torus_move3 = new THREE.Mesh( t_move, tM2 );
+    torus_move3.position.set( 0, 0, -14);
+    //scene.add( torus_move3 );
+
+    var torus_move4 = new THREE.Mesh( t_move, tM2 );
+    torus_move4.position.set( 0, 0, -16);
+    //scene.add( torus_move4 );
+
+    var torus_move5 = new THREE.Mesh( t_move, tM2 );
+    torus_move5.position.set( 0, 0, -18);
+    //scene.add( torus_move5 );
+    
     
 
     //球
-    var sphereGeometry = new THREE.SphereGeometry( 0.5, 32, 32 ); 
+    var sphereGeometry = new THREE.SphereGeometry( 0.8, 32, 32 ); 
     var sphereMaterial = new THREE. MeshPhongMaterial( {color: 0x0000ff,wireframe: true} );
 
     var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
-    sphere.position.set( -2, 0, -1);
+    sphere.position.set( 0, 0, -10);
     //scene.add( sphere );
 
 
@@ -75,8 +95,17 @@
     Group1.add(torus1);
     Group1.add(torus2);
     Group1.add(sphere);
-    Group1.position.set(0,0,-10);
+    Group1.position.set(0,0,-20);
     scene.add(Group1);
+
+    const Group2 = new THREE.Group()
+    Group2.add(torus_move1);
+    Group2.add(torus_move2);
+    Group2.add(torus_move3);
+    Group2.add(torus_move4);
+    Group2.add(torus_move5);
+    Group2.position.set(0,0,0);
+    scene.add(Group2);
 
 
 
@@ -106,8 +135,10 @@
       sphere.rotation.x += 0.01;
       //sphere.rotation.y -= 0.01;
 
-      Group1.rotation.x += 0.01;
-      Group1.rotation.y += 0.01;
+      Group1.rotation.x += 0.008;
+      Group1.rotation.y += 0.008;
+
+
   
       renderer.render(scene, camera);
     };
